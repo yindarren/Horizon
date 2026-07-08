@@ -1,75 +1,65 @@
 {
   "version": "1.0",
   "ai": {
-    "provider": "deepseek",
-    "model": "deepseek-v4-flash",
-    "base_url": "https://api.deepseek.com",
-    "api_key_env": "DEEPSEEK_API_KEY",
+    "provider": "gemini",
+    "model": "gemini-2.0-flash",
+    "api_key_env": "GOOGLE_API_KEY",
     "temperature": 0.3,
-    "max_tokens": 8192,
-    "throttle_sec": 1,
-    "languages": [
-      "zh",
-      "en"
-    ],
-    "analysis_concurrency": 5,
-    "enrichment_concurrency": 5
+    "max_tokens": 4096,
+    "throttle_sec": 4.5,
+    "analysis_concurrency": 1,
+    "enrichment_concurrency": 1,
+    "languages": ["zh"]
+  },
+  "email": {
+    "enabled": false,
+    "smtp_server": "smtp.qq.com",
+    "smtp_port": 465,
+    "imap_enabled": false,
+    "imap_server": "imap.qq.com",
+    "imap_port": 993,
+    "email_address": "disabled@example.com",
+    "sender_name": "Horizon Daily",
+    "subscribe_keyword": "SUBSCRIBE",
+    "unsubscribe_keyword": "UNSUBSCRIBE"
   },
   "sources": {
-    "github": [
-      {
-        "type": "user_events",
-        "username": "karpathy",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "vllm-project",
-        "repo": "vllm",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "sgl-project",
-        "repo": "sglang",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "triton-lang",
-        "repo": "triton",
-        "enabled": true
-      }
-    ],
+    "github": [],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 150
+      "min_score": 100
     },
     "rss": [
       {
-        "name": "Simon Willison",
-        "url": "https://simonwillison.net/atom/everything/",
+        "name": "Global Funded Study Opportunities",
+        "url": "https://news.google.com/rss/search?q=%28%22fully+funded+scholarship%22+OR+%22tuition-free+program%22+OR+%22free+study+program%22+OR+%22free+summer+school%22+OR+%22fully+funded+fellowship%22+OR+%22scholarship+international+students%22%29+%28China+OR+Chinese+OR+%22international+students%22%29&hl=en-US&gl=US&ceid=US%3Aen",
         "enabled": true,
-        "category": "ai-tools"
+        "category": "study-opportunities"
       },
       {
-        "name": "GitHub Trending - Daily",
-        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+        "name": "AI Productivity and Monetization",
+        "url": "https://news.google.com/rss/search?q=%28%22AI+agent%22+OR+%22AI+automation%22+OR+%22AI+workflow%22+OR+%22AI+coding%22+OR+%22AI+monetization%22+OR+%22AI+revenue%22+OR+%22AI+productivity%22+OR+%22agentic+AI%22%29&hl=en-US&gl=US&ceid=US%3Aen",
         "enabled": true,
-        "category": "github-trending"
+        "category": "ai-leverage"
       },
       {
-        "name": "Semianalysis",
-        "url": "https://newsletter.semianalysis.com/feed",
+        "name": "Global Banking and Brokerage Access",
+        "url": "https://news.google.com/rss/search?q=%28%22non-resident+bank+account%22+OR+%22open+bank+account+online%22+OR+%22overseas+bank+account%22+OR+%22international+brokerage+account%22+OR+%22brokerage+for+non-residents%22+OR+%22credit+card+for+non-residents%22+OR+%22remote+account+opening%22%29+%28China+OR+Chinese+OR+%22mainland+China%22%29&hl=en-US&gl=US&ceid=US%3Aen",
         "enabled": true,
-        "category": "semiconductors"
+        "category": "global-assets"
       },
       {
-        "name": "LWN.net",
-        "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
+        "name": "Global Mobility and Residency",
+        "url": "https://news.google.com/rss/search?q=%28%22digital+nomad+visa%22+OR+%22low+cost+residency%22+OR+%22easy+residency+permit%22+OR+%22residency+by+investment%22+OR+%22citizenship+pathway%22+OR+%22permanent+residence%22+OR+%22visa-free+policy%22+OR+%22residence+card%22%29&hl=en-US&gl=US&ceid=US%3Aen",
         "enabled": true,
-        "category": "linux-kernel"
+        "category": "global-mobility"
+      },
+      {
+        "name": "QQQ and Nasdaq 100",
+        "url": "https://news.google.com/rss/search?q=%28%22QQQ+ETF%22+OR+%22Nasdaq+100+ETF%22+OR+%22Invesco+QQQ%22+OR+%22US+stock+ETF%22+OR+%22Nasdaq-100%22+OR+%22ETF+flows%22%29&hl=en-US&gl=US&ceid=US%3Aen",
+        "enabled": true,
+        "category": "us-equities"
       }
     ],
     "reddit": {
@@ -80,70 +70,138 @@
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 60
+          "fetch_limit": 15,
+          "min_score": 30
         },
         {
           "subreddit": "LocalLLaMA",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 60
+          "fetch_limit": 15,
+          "min_score": 20
         }
       ],
       "users": [],
-      "fetch_comments": 10
+      "fetch_comments": 5
     },
     "telegram": {
+      "enabled": false,
+      "channels": []
+    },
+    "twitter": {
+      "enabled": false,
+      "users": [],
+      "fetch_limit": 10,
+      "fetch_reply_text": false,
+      "max_replies_per_tweet": 3,
+      "max_tweets_to_expand": 10,
+      "reply_min_likes": 5
+    },
+    "openbb": {
+      "enabled": false,
+      "fetch_filings": false,
+      "filings_provider": "sec",
+      "watchlists": []
+    },
+    "ossinsight": {
       "enabled": true,
-      "channels": [
-        {
-          "channel": "zaihuapd",
-          "enabled": true,
-          "fetch_limit": 20
-        }
-      ]
+      "period": "past_24_hours",
+      "languages": [
+        "All",
+        "Python",
+        "TypeScript"
+      ],
+      "keywords": [
+        "agent",
+        "AI",
+        "automation",
+        "workflow",
+        "browser",
+        "research",
+        "LLM",
+        "inference"
+      ],
+      "min_stars": 10,
+      "max_items": 30
+    },
+    "gdelt": {
+      "enabled": false,
+      "query": "artificial intelligence",
+      "mode": "ArtList",
+      "max_records": 75,
+      "timespan": null,
+      "language": null,
+      "country": null,
+      "category": "news"
+    },
+    "google_news": {
+      "enabled": false,
+      "query": "artificial intelligence",
+      "language": "en",
+      "country": "US",
+      "ceid": null,
+      "max_results": 100,
+      "category": "news"
     }
   },
   "filtering": {
-    "ai_score_threshold": 8.0,
-    "time_window_hours": 24
+    "ai_score_threshold": 5.8,
+    "time_window_hours": 24,
+    "max_items": 25,
+    "category_groups": {
+      "study": {
+        "name": "全球低成本学习机会",
+        "limit": 5,
+        "categories": [
+          "study-opportunities"
+        ]
+      },
+      "ai": {
+        "name": "AI生产力与变现",
+        "limit": 6,
+        "categories": [
+          "ai-leverage"
+        ]
+      },
+      "assets": {
+        "name": "海外资产基础设施",
+        "limit": 5,
+        "categories": [
+          "global-assets"
+        ]
+      },
+      "mobility": {
+        "name": "全球签证居留与移民",
+        "limit": 5,
+        "categories": [
+          "global-mobility"
+        ]
+      },
+      "markets": {
+        "name": "美股QQQ与Nasdaq-100",
+        "limit": 4,
+        "categories": [
+          "us-equities"
+        ]
+      }
+    },
+    "default_group": "other",
+    "default_group_limit": 3
   },
   "webhook": {
-    "enabled": true,
+    "enabled": false,
     "url_env": "HORIZON_WEBHOOK_URL",
-    "delivery": "summary_and_items",
-    "overview_position": "last",
-    "platform": "feishu",
-    "layout": "collapsible",
+    "delivery": "summary",
+    "overview_position": "first",
+    "platform": "generic",
+    "layout": "markdown",
     "fallback_layout": "markdown",
     "languages": [
       "zh"
     ],
     "request_body": {
-      "msg_type": "interactive",
-      "card": {
-        "schema": "2.0",
-        "config": {
-          "wide_screen_mode": true
-        },
-        "header": {
-          "title": {
-            "tag": "plain_text",
-            "content": "#{message_title}"
-          },
-          "template": "blue"
-        },
-        "body": {
-          "elements": [
-            {
-              "tag": "markdown",
-              "content": "#{summary}"
-            }
-          ]
-        }
-      }
+      "text": "#{message_title}\n\n#{summary}"
     },
     "headers": ""
   }
